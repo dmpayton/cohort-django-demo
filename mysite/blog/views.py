@@ -1,10 +1,14 @@
 from django.shortcuts import render
+from django.views import generic
 
 from .models import Post
 
 
-def post_list(request):
-    post_list = Post.objects.filter(status='P')
-    return render(request, 'blog/post_list.html', context={
-        'post_list': post_list,
-    })
+class PostList(generic.ListView):
+    queryset = Post.objects.filter(status='P')
+    template_name = 'blog/post_list.html'
+
+
+class PostDetail(generic.DetailView):
+    queryset = Post.objects.filter(status='P')
+    template_name = 'blog/post_detail.html'

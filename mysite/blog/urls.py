@@ -1,7 +1,8 @@
 from django.conf.urls import url
 
-from .views import post_list
+from .views import PostDetail, PostList
 
 urlpatterns = [
-    url(r'^$', post_list),
+    url(r'^$', PostList.as_view()),
+    url(r'^(?P<pk>[0-9])/$', PostDetail.as_view()),
 ]
