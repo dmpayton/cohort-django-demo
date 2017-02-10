@@ -4,11 +4,13 @@ from django.views import generic
 from .models import Post
 
 
-class PostList(generic.ListView):
+class PostMixin(object):
     queryset = Post.objects.filter(status='P')
+
+
+class PostList(PostMixin, generic.ListView):
     template_name = 'blog/post_list.html'
 
 
-class PostDetail(generic.DetailView):
-    queryset = Post.objects.filter(status='P')
+class PostDetail(PostMixin, generic.DetailView):
     template_name = 'blog/post_detail.html'
